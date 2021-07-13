@@ -1,0 +1,8 @@
+@media (max-width: 668px) {
+    .fc-timeGridWeek-button {
+        display: none;
+    }
+    .fc-dayGridMonth-button {
+        display: none;
+    }
+}

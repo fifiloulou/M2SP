@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}création d'une news{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-md-center">
+            <div class="col-md-6">
+                <h1>Créer une nouvelle news</h1>
+
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+
+                <button type="submit" class="btn btn-primary mt-3">Créer la nouvelle news</button>
+
+                <a href="{{ path ('unes_index') }}" class="btn btn-success mt-3">Annuler</a>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

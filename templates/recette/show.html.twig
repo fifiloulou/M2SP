@@ -1,0 +1,81 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ recette.title }}{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-9">
+                    <!-- Post content-->
+                    <recette>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{recette.title}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">{{ recette.createdAt | date('d/m/Y')}}</div>
+                            <!-- Post categories-->
+                            {% if app.user and app.user == recette.author %}
+                            <div class="container text-right my-3">
+                                <a href="{{ path ('recette_edit', {'slug': recette.slug}) }}" class="btn btn-outline-secondary">Modifier la recette</a>
+                                <a href="{{ path ('recette_delete', {'slug': recette.slug}) }}" class="btn btn-outline-danger"
+                                onclick="return confirm(`Etes vous sur de vouloir supprimer la recette : {{recette.title}} ?`)"
+                                >Supprimer la recette</a>
+                            </div>
+                            {% endif %}
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{ vich_uploader_asset(recette, 'imageFile') | imagine_filter('medium') }}" alt="{{recette.title}}" /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{recette.ingredient}}</p>
+                        </section>
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{recette.preparation}}</p>
+                        </section>
+                    </recette>
+
+                    <!-- Comments section-->
+                    <section>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <div class="alert alert-light">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-outline-primary mt-3">Commenter</button>
+                                    {{ form_end(form) }}
+                                </div>                                
+                                <!-- Comment-->
+                                <div class="d-flex mb-4">
+                                    <div class="ms-3">
+                                        {% if recette.commentRecettes|length > 0 %}
+                                            {% for commentRecette in commentRecettes %}
+                                            <div class="fw-bold">{{ commentRecette.author.firstname}} {{ commentRecette.author.lastname}}</div>
+                                            {{commentRecette.content}}
+                                            {% endfor %}
+                                        {% else %}
+                                            <h3>Cette recette n'a pas de commentaires.</h3>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex align-items-center mt-lg-5 mb-4">
+                        <div class="ms-3">
+                            <a href="{{ path ('security_index', {'slug': recette.author.slug}) }}">
+                                <div class="fw-bold fs-1">{{recette.author.firstName}} {{recette.author.lastName}}</div>
+                            </a>
+                            <div class="text-muted">{{recette.author.recettes | length}} recette{% if recette.author.recettes|length > 1 %}s{% endif %}</div>
+                            <div class="mb-5"><p class="fs-5 mb-4">{{recette.author.description}}</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

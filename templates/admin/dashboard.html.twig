@@ -1,0 +1,55 @@
+{% extends "@EasyAdmin/layout.html.twig" %}
+
+{% block content %}
+
+<div class="container-fluid">
+        <h1 class="mt-4">Tableau de bord</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Actuellement</li>
+        </ol>
+        <div class="row">
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #3a86ff;">
+                    <div class="card-body">
+                        {{ countArticle['value'] }} Articles
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #fb5607;">
+                    <div class="card-body">
+                        {{ countRecette['value'] }} Recettes
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #8338ec;">
+                    <div class="card-body">
+                        {{ countUne['value'] }} News
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #ff006e;">
+                    <div class="card-body">
+                        {{ countCommentArticle['value'] }} Commentaires des articles
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #ff006e;">
+                    <div class="card-body">
+                        {{ countCommentRecette['value'] }} Commentaires des recettes
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6">
+                <div class="card text-white mb-4" style="background: #ffbe0b;">
+                    <div class="card-body">
+                        {{ countUser['value'] }} Utilisateurs
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

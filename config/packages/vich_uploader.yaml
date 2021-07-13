@@ -1,0 +1,16 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        article_images:
+            uri_prefix: '%article_images%'
+            upload_destination: '%kernel.project_dir%/public%article_images%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            delete_on_update: true
+            delete_on_remove: true
+        recette_images:
+            uri_prefix: '%recette_images%'
+            upload_destination: '%kernel.project_dir%/public%recette_images%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            delete_on_update: true
+            delete_on_remove: true

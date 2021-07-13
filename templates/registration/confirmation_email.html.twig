@@ -1,0 +1,13 @@
+<img src="{{ email.image('@images/M2SP.png') }}" alt="Logo">
+<h1>
+    Bonjour,<br>
+
+</h1>
+<p>
+    Pour activer votre compte, merci de confirmer votre adresse mail en cliquant sur le lien suivant: <br><br>
+    <a href="{{ signedUrl|raw }}">Je confirme mon mail</a>. 
+    Ce lien expire dans : {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p>
+<p>
+    Merci !
+</p>

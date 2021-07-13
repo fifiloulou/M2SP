@@ -1,0 +1,171 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+	<!-- Header -->
+        <header id="degrad" class="bg-yellow py-5 shadow border-0">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center justify-content-center">
+                    <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        <div class="my-5 text-center text-xl-start">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Bienvenue</h1>
+                            <p class="lead fw-normal text-white-50 mb-4">Découvrez toutes les actualités de Mont de Marsan et de Saint Pierre du Mont.</p>
+                            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
+                                {% if not app.user %}
+                                    <a class="btn btn-outline-blue btn-lg px-4 me-sm-3" href="{{ path('app_register') }}">S'inscrire</a>
+                                    <a class="btn btn-outline-light btn-lg px-4" href="{{ path('app_login') }}">Se connecter</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center "><img class="img-fluid rounded-3 my-5 shadow border-0" src="{{asset ('mdmhome.jpg')}}" alt="..." /></div>
+                </div>
+            </div>
+        </header>
+    <!-- End Header -->
+
+    <!-- Info News -->
+        <section class="py-5 bg-light">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="text-center">
+                            <h2 class="fw-bolder">Dernières news</h2>
+                            <p class="lead fw-normal text-muted mb-5">Voici les dernières news publiés par la communauté.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-5">
+                    {% for une in unes %}
+                        {% include "partials/cardUne.html.twig" %}
+                    {% endfor %}
+                    <div class="text-end mb-5 mb-xl-0">
+                        <a class="btn btn-outline-blue" href="{{ path ('unes_index')}}">Voir plus &raquo;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- End Info News -->
+
+    <!-- Articles -->
+        <section class="py-5">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="text-center">
+                            <h2 class="fw-bolder">Derniers articles</h2>
+                            <p class="lead fw-normal text-muted mb-5">Voici les derniers articles publiés par la communauté.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-5">
+                    {% for article in articles %} 
+                        {% include "partials/cardArticle.html.twig" %}
+                    {% endfor %}
+                </div>
+                <div class="text-end mb-5 mb-xl-0">
+                    <a class="btn btn-outline-blue" href="{{ path ('articles_index')}}">Voir plus &raquo;</a>
+                </div>
+            </div>
+        </section>
+    <!-- End articles -->
+
+    <!-- Articles -->
+        <section class="py-5">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-8 col-xl-6">
+                        <div class="text-center">
+                            <h2 class="fw-bolder">Dernières recettes</h2>
+                            <p class="lead fw-normal text-muted mb-5">Voici les dernières recettes publiés par la communauté.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row gx-5">
+                    {% for recette in recettes %} 
+                        {% include "partials/cardRecette.html.twig" %}
+                    {% endfor %}
+                </div>
+                <div class="text-end mb-5 mb-xl-0">
+                    <a class="btn btn-outline-blue" href="{{ path ('recettes_index')}}">Voir plus &raquo;</a>
+                </div>
+            </div>
+        </section>
+    <!-- End articles -->
+
+    <!-- Vidéos et liens -->
+        <section class="py-5 bg-light">
+            <div class="container px-5 my-5">
+                <div class="text-center">
+                    <h2 class="fw-bolder">Les sites à l'honneur</h2>
+                    <p class="lead fw-normal text-muted mb-5"></p>
+                </div>
+                <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-xl-4 justify-content-center">
+                    <div class="col mb-5 mb-5 mb-xl-0">
+                        <div class="text-center">
+                        <a class="lien" href="https://www.radio-mdm.fr/" target="_blank">
+                            <img class="img-fluid rounded-circle mb-4 px-4" src="{{asset ('radio.jpg')}}" alt="logo radio mdm" />
+                            <h5 class="fw-bolder">Radio MDM</h5>
+                            <div class="fst-italic text-muted"></div>
+                        </a>
+                        </div>
+                    </div>
+                    <div class="col mb-5 mb-5 mb-xl-0">
+                        <div class="text-center">
+                            <a class="lien" href="http://www.montdemarsan.fr" target="_blank">
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="{{asset ('mdm.jpg')}}" alt="logo mont de marsan" />
+                                <h5 class="fw-bolder">Mairie de Mont de Marsan</h5>
+                                <div class="fst-italic text-muted"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col mb-5 mb-5 mb-sm-0">
+                        <div class="text-center">
+                            <a class="lien" href="https://www.saintpierredumont.fr" target="_blank">
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="{{asset ('spdm.jpg')}}" alt="logo saint pierre du mont" />
+                                <h5 class="fw-bolder">Mairie de Saint Pierre du Mont</h5>
+                                <div class="fst-italic text-muted"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col mb-5">
+                        <div class="text-center">
+                            <a class="lien" href="https://www.stademontoisrugby.fr/" target="_blank">
+                                <img class="img-fluid rounded-circle mb-4 px-4" src="{{asset ('rugby.jpg')}}" alt="logo stade montois" />
+                                <h5 class="fw-bolder">Stade Montois Rugby</h5>
+                                <div class="fst-italic text-muted"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5" id="scroll-target">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="ratio ratio-16x9 shadow border-0">
+                            <iframe src="https://www.youtube.com/embed/1aRUJm6Xs3M"
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="padtopmobile col-lg-6">
+                        <h2 class="fw-bolder">La vidéo du moment</h2>
+                        <p class="lead fw-normal text-muted mb-0">
+                            Lorant Deutsch vous emmène à la découverte de l'histoire de <strong>Mont de Marsan</strong> en 5 minutes chrono dans à toute Berzingue !
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    <!-- End vidéos et liens -->     
+    </main>
+    <a class="" id="mutebacktotop" href="#"><i class="fas fa-arrow-up fa-3x" id="backtotop"></i></a>
+</body>
+{% endblock %}

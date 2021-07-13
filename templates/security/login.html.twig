@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MDSP - {% block title %}Connexion{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="./css/login.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        {% block body %}
+        <div class="container-fluid">
+            <div class="row no-gutter">
+                <div class="col-md-8 col-lg-6">
+                    <div class="login d-flex align-items-center py-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-8 mx-auto">
+                                    <h3 class="login-heading mb-4">Bienvenue</h3>
+                                    <form method="post">
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                        {% endif %}
+
+                                        {% if app.user %}
+                                            <div class="mb-3">
+                                                Vous êtes connecté en tant que
+                                                {{ app.user.username }},
+                                                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                                            </div>
+                                        {% else %}
+                                        <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
+                                        <label for="inputEmail">Email</label>
+                                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                        <label for="inputPassword">Mot de passe</label>
+                                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required><input
+                                        type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                                        <button class="btn btn-lg btn-outline-primary mt-2" type="submit">
+                                            Connexion
+                                        </button>
+                                        {% endif %}
+                                        <div class="container text-center my-5 pb-5">
+                                            <a href="{{ path ('app')}}" class="btn btn-outline-success center">Retour à l'accueil</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="d-none d-md-flex col-md-4 col-lg-6" src="{{asset ('mdmlogin.jpg')}}" alt="image_de_connexion" />
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+</html>
+
+
+
+
+

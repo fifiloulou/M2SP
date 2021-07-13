@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container px-5 my-5">
+            <div class="row gx-5">
+                <div class="col-lg-9">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{article.title}}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">{{ article.createdAt | date('d/m/Y')}}</div>
+                            <!-- Post categories-->
+                            {% if app.user and app.user == article.author %}
+                            <div class="container text-right my-3">
+                                <a href="{{ path ('article_edit', {'slug': article.slug}) }}" class="btn btn-outline-secondary">Modifier l'article</a>
+                                <a href="{{ path ('article_delete', {'slug': article.slug}) }}" class="btn btn-outline-danger"
+                                onclick="return confirm(`Etes vous sur de vouloir supprimer l'article : {{article.title}} ?`)"
+                                >Supprimer l'article</a>
+                            {% endif %}
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('medium') }}" alt="{{article.title}}" /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{article.content}}</p>
+                        </section>
+                    </article>
+
+                    <!-- Comments section-->
+                    <section>
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                <div class="alert alert-light">
+                                    {{ form_start(form) }}
+                                    {{ form_widget(form) }}
+                                    <button type="submit" class="btn btn-outline-primary mt-3">Commenter</button>
+                                    {{ form_end(form) }}
+                                </div>                                
+                                <!-- Comment-->
+                                <div class="d-flex mb-4">
+                                    <div class="ms-3">
+                                        {% if article.commentArticles|length > 0 %}
+                                            {% for commentArticle in commentArticles %}
+                                            <div class="fw-bold">{{ commentArticle.author.firstname}} {{ commentArticle.author.lastname}}</div>
+                                            {{commentArticle.content}}
+                                            {% endfor %}
+                                        {% else %}
+                                            <h3>Cette annonce n'a pas de commentaires.</h3>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-3">
+                    <div class="d-flex align-items-center mt-lg-5 mb-4">
+                        <div class="ms-3">
+                            <a href="{{ path ('security_index', {'slug': article.author.slug}) }}">
+                                <div class="fw-bold fs-1">{{article.author.firstName}} {{article.author.lastName}}</div>
+                            </a>
+                            <div class="text-muted">{{article.author.articles | length}} article{% if article.author.articles|length > 1 %}s{% endif %}</div>
+                            <div class="mb-5"><p class="fs-5 mb-4">{{article.author.description}}</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

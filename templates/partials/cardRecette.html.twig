@@ -1,0 +1,24 @@
+<div class="col-lg-4 mb-5">
+    <div id="card" class="card h-100 shadow border-0">
+        <img class="card-img-top" src="{{ vich_uploader_asset(recette, 'imageFile') | imagine_filter('thumb') }}" alt="{{ recette.title }}">
+        <div class="card-body">
+            <strong class="d-inline-block mb-2" style="color: #fb5607;">Recette</strong>
+            <span class="card-text">
+                <small class="text-muted">Publié le {{ recette.createdAt | date('d/m/Y')}}</small>
+                <small class="text-muted">par {{ recette.author.firstname }} {{ recette.author.lastname }}</small>
+            </span>
+            <h4 class="card-title">{{ recette.title }}</h4>
+            <p class="card-text">{{recette.preparation | u.truncate(90, '...')}}</p>
+            <hr>
+            <div class="">
+                <a href="{{ path ('recette_show', {'slug': recette.slug} )}}" class="btn btn-outline-secondary">Lire la suite &raquo;</a>
+                {% if app.user and app.user == recette.author %}
+                    <a href="{{ path ('recette_edit', {'slug': recette.slug}) }}" class="btn btn-outline-warning">Modifier la recette</a>
+                    <a href="{{ path ('recette_delete', {'slug': recette.slug}) }}" class="btn btn-outline-danger mt-1"
+                    onclick="return confirm(`Etes vous sur de vouloir supprimer la recette : {{recette.title}} ?`)"
+                    >Supprimer la recette</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

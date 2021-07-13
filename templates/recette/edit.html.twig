@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Modification d'une recette{% endblock %}
+
+{% block body %}
+<div class="container-fluid my-5">
+
+    <div class="container my-5">
+        <h1>Modifier la recette {{ recette.title }}</h1>
+
+        {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+
+        <button type="submit" class="btn btn-outline-primary mt-3">Modifier la recette</button>
+
+        <a href="{{ path ('security_account') }}" class="btn btn-outline-success mt-3">Annuler</a>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

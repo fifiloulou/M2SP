@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+<header class="py-5">
+    <div class="container px-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xxl-6">
+                <div class="text-center my-5">
+                    <h2 class="fw-bolder">Présentation</h2>
+                    <hr>
+                    <p class="lead fw-normal text-muted">Qui sommes-nous ?</p>
+                    <p>Amoureux de nos villes et souhaitant être au courant de toutes les activités, nous avons créé ce site pour vous tous.</p>
+                    <hr>
+                    <p class="lead fw-normal text-muted">Comment ça marche ?</p>
+                    <p>Bienvenue sur notre site d'informations de <strong>Mont de marsan</strong> et de <strong>Saint Pierre du Mont</strong>.
+                    Ici vous allez retrouver des <a href="{{ path ('articles_index') }}">articles</a>, que vous pouvez consulter librement.
+                    Les articles servent à vous informer sur les sorties, les activitées ou les manifestations de nos villes.<br>
+                    Vous pouvez aussi partager une de vos délicieuses <a href="{{ path ('recettes_index') }}">recette.</a><br>
+                    Les <a href="{{ path ('unes_index') }}">news</a> sont là pour partager l'agenda à la communauté.</p>
+                    <hr>
+                    <p class="lead fw-normal text-muted">Pourquoi s'inscrire ?</p>
+                    <p>Vous inscrire, vous permet de publier vos propres articles, afin de partager les richesses de nos villes.<br>
+                    Si vous aussi vous avez eu la désagréable surprise de découvrir dans un magazine ou sur Facebook une super sorties qui avez lieu la veille,
+                    ce site est fait pour vous. Alors, inscrivez-vous, vous pouvez en plus laisser des commentaires.</p>
+                    <hr>
+                    <p class="lead fw-normal text-muted">Une question ?</p>
+                    <p>Vous pouvez nous contacter pour toutes questions relatives à <a href="{{ path ('app') }}" class="">M2SP</a><br>
+                    Voici le mail de <a href="mailto:philippe.favero@gmail.com">contact</a></p>
+                    <hr>
+                </div>
+                {% if not app.user %}
+                    <a class="btn btn-outline-blue btn-lg px-4 me-sm-3 mt-5" href="{{ path('app_register') }}">S'inscrire</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+{% endblock %}

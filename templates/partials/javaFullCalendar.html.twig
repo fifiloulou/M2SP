@@ -1,0 +1,53 @@
+{% block stylesheets %}
+        <link rel="stylesheet" href="./css/calendar.css">
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            var calendarEl = document.getElementById("calendrier")
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'listMonth',
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                headerToolbar: {
+                    start: 'today prev,next',
+                    center: 'title',
+                    end: 'listMonth dayGridMonth,timeGridWeek'
+                },
+                buttonText: {
+                    today: 'Aujourd\'hui',
+                    month: 'Mois',
+                    week: 'Semaine',
+                    list: 'Liste',
+                },
+                navLinks: true,
+                themeSystem: 'bootstrap',
+                allDaySlot: false,
+
+                events: {{ data|raw }},
+
+                eventClick: function(info) {
+                var eventObj = info.event;
+
+                if (eventObj.url) {
+                    alert(
+                    'Pour voir la page internet de l\'événement: ' + eventObj.title + '\n' +
+                    'Ouvrir ' + eventObj.url + ' dans une nouvelle fenêtre =>'
+                    );
+
+                    info.el.style.borderColor = 'yellow';
+
+                    window.open(eventObj.url);
+
+                    info.jsEvent.preventDefault(); // prevents browser from following link in current tab.
+                } else {
+                    alert('Clicked ' + eventObj.title);
+                }
+                },
+            });
+            calendar.render()
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,24 @@
+<div class="col-lg-4 mb-5">
+    <div id="card" class="card h-100 shadow border-0">
+        <img class="card-img-top" src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('thumb') }}" alt="{{ article.title }}">
+        <div class="card-body">
+            <strong class="d-inline-block mb-2" style="color: #3A86FF;">Article</strong>
+            <span class="card-text">
+                <small class="text-muted">Publié le {{ article.createdAt | date('d/m/Y')}}</small>
+                <small class="text-muted">par {{ article.author.firstname }} {{ article.author.lastname }}</small>
+            </span>
+            <h4 class="card-title">{{ article.title }}</h4>
+            <p class="card-text">{{article.content | u.truncate(90, '...')}}</p>
+            <hr>
+            <div class="">
+                <a href="{{ path ('article_show', {'slug': article.slug} )}}" class="btn btn-outline-secondary">Lire la suite &raquo;</a>
+                {% if app.user and app.user == article.author %}
+                    <a href="{{ path ('article_edit', {'slug': article.slug}) }}" class="btn btn-outline-warning">Modifier l'article</a>
+                    <a href="{{ path ('article_delete', {'slug': article.slug}) }}" class="btn btn-outline-danger mt-1"
+                    onclick="return confirm(`Etes vous sur de vouloir supprimer l'article : {{article.title}} ?`)"
+                    >Supprimer l'article</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
